@@ -1,0 +1,65 @@
+{% extends 'core/base.html'%}
+
+{% block title %}
+    Welcome
+{% endblock %}
+
+
+{% block content %}
+
+<div class="px-6 py-20 text-center md:px-12 lg:text-left">
+    <div class="w-100 mx-auto sm:max-w-2xl md:max-w-3xl lg:max-w-5xl xl:max-w-7xl">
+      <div class="grid items-center gap-12 lg:grid-cols-2">
+        <div class="mt-12 lg:mt-0">
+            <h1 class="mt-6 mb-10 text-9xl font-bold tracking-tight">
+                Mercato
+            </h1>
+          <h2 class="mt-0 mb-16 text-6xl font-bold tracking-tight text-gray-500">
+            The best offers <br /><span class="text-teal-500">for your needs</span>
+          </h2>
+        </div>
+        <div class="mb-12 lg:mb-0">
+          <img src="https://tecdn.b-cdn.net/img/new/ecommerce/horizontal/048.jpg"
+            class="w-full rounded-lg shadow-lg dark:shadow-black/20" alt="" />
+        </div>
+      </div>
+    </div>
+  </div>
+  
+    <div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
+        
+        <h2 class="mb-12 text-4xl text-center font-bold tracking-wide border-b-4 border-teal-300">Newest items</h2>
+        
+        <div class="grid grid-cols-3 gap-3">
+            {% for item in items %}
+            <div>
+                <a href="{% url 'item:detail' item.id %}">
+                    <div>
+                        <img src="{{item.image.url}}" class="rounded-t-xl" />
+                    </div>
+
+                    <div class="p-6 bg-white rounded-b-xl">
+                        <h2 class="text-2xl">{{item.name}}</h2>
+                        <p class="text-gray-500">Price: {{ item.price }}</p>
+                    </div>
+                </a> 
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
+        <h2 class="mb-12 text-4xl text-center font-bold tracking-wide border-b-4 border-teal-300">Categories</h2>
+        <div class="grid grid-cols-3 gap-3">
+            {% for category in categories %}
+            <div>
+                <a href="{% url 'item:itemsca' category.id %}">
+                    <div class="p-6 bg-white rounded-b-xl">
+                        <h2 class="text-2xl">{{category.name}}</h2>
+                        <p class="text-gray-500">{{category.items.count}} items</p>
+                    </div>
+                </a> 
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
